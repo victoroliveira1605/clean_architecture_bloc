@@ -1,0 +1,22 @@
+name: clean_architecture_movie
+description: Example architecture clean.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  dartz:
+  dio:
+  get_it:
+  bloc:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
