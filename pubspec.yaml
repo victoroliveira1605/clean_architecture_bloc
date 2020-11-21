@@ -8,15 +8,18 @@ environment:
 
 dependencies:
   dartz:
-  dio:
   get_it:
+  injectable:
   bloc:
+  http:
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator:
+  build_runner:
 
 flutter:
   uses-material-design: true

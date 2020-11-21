@@ -1,15 +1,23 @@
+import 'package:clean_architecture_movie/app_pages.dart';
 import 'package:flutter/material.dart';
 
-class SplashPage extends StatefulWidget {
-  SplashPage({Key key}) : super(key: key);
+class SplashPage extends StatelessWidget {
+  const SplashPage({Key key}) : super(key: key);
 
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    _onChangeScreen(context);
+    return Container(
+      color: Colors.amber,
+    );
   }
+}
+
+_onChangeScreen(BuildContext context) async {
+  return await Future.delayed(
+    Duration(seconds: 5),
+    () {
+      Navigator.of(context).pushNamed(Routes.UPCOMING);
+    },
+  );
 }
