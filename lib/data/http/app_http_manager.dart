@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:clean_architecture_movie/data/http/http_manager.dart';
 import 'package:clean_architecture_movie/domain/exceptions/exceptions.dart';
-import 'package:clean_architecture_movie/utils/constants.dart';
+import 'package:clean_architecture_movie/utils/strings/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
@@ -19,10 +18,13 @@ class AppHttpManager implements HttpManager {
     Map<String, String> headers,
   }) async {
     try {
-      print('Api Get request url $url');
       final response = await http
-          .get(_queryBuilder(url, query), headers: _headerBuilder(headers))
+          .get(_queryBuilder(url, query), headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
+      print('Api Get request url $url');
+      print('Api Get request key $headers');
+      print('request $response.request.headers');
+
       return _returnResponse(response);
     } on Exception catch (_) {
       throw NetworkException();
@@ -40,8 +42,7 @@ class AppHttpManager implements HttpManager {
       print('Api Post request url $url, with $body');
       final response = await http
           .post(_queryBuilder(url, query),
-              body: body != null ? json.encode(body) : null,
-              headers: _headerBuilder(headers))
+              body: body != null ? json.encode(body) : null, headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
       return _returnResponse(response);
     } on Exception catch (_) {
@@ -60,7 +61,7 @@ class AppHttpManager implements HttpManager {
       print('Api Put request url $url, with $body');
       final response = await http
           .put(_queryBuilder(url, query),
-              body: json.encode(body), headers: _headerBuilder(headers))
+              body: json.encode(body), headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
       return _returnResponse(response);
     } on Exception catch (_) {
@@ -77,24 +78,12 @@ class AppHttpManager implements HttpManager {
     try {
       print('Api Delete request url $url');
       final response = await http
-          .delete(_queryBuilder(url, query), headers: _headerBuilder(headers))
+          .delete(_queryBuilder(url, query), headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
       return _returnResponse(response);
     } on Exception catch (_) {
       throw NetworkException();
     }
-  }
-
-  Map<String, String> _headerBuilder(Map<String, String> headers) {
-    final headers = <String, String>{};
-    headers[HttpHeaders.acceptHeader] = 'application/json';
-    headers[HttpHeaders.contentTypeHeader] = 'application/json';
-    if (headers != null && headers.isNotEmpty) {
-      headers.forEach((key, value) {
-        headers[key] = value;
-      });
-    }
-    return headers;
   }
 
   String _queryBuilder(String path, Map<String, dynamic> query) {

@@ -1,32 +1,35 @@
-class Movie {
-  final double popularity;
-  final int vote_count;
-  final bool video;
-  final String poster_path;
-  final int id;
-  final bool adult;
-  final String backdrop_path;
-  final String original_language;
-  final String original_title;
-  final List<int> genre_ids;
-  final String title;
-  final double vote_average;
-  final String overview;
-  final String release_date;
+import 'package:clean_architecture_movie/infra/models/dates.dart';
+import 'package:clean_architecture_movie/infra/models/result.dart';
 
-  Movie(
-      {this.popularity,
-      this.vote_count,
-      this.video,
-      this.poster_path,
-      this.id,
-      this.adult,
-      this.backdrop_path,
-      this.original_language,
-      this.original_title,
-      this.genre_ids,
-      this.title,
-      this.vote_average,
-      this.overview,
-      this.release_date});
+class Movie {
+  Movie({
+    this.results,
+    this.page,
+    this.totalResults,
+    this.dates,
+    this.totalPages,
+  });
+
+  List<Result> results;
+  int page;
+  int totalResults;
+  Dates dates;
+  int totalPages;
+
+  factory Movie.fromJson(Map<String, dynamic> json) => Movie(
+        results:
+            List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        page: json["page"],
+        totalResults: json["total_results"],
+        dates: Dates.fromJson(json["dates"]),
+        totalPages: json["total_pages"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "page": page,
+        "total_results": totalResults,
+        "dates": dates.toJson(),
+        "total_pages": totalPages,
+      };
 }

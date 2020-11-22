@@ -12,6 +12,8 @@ dependencies:
   injectable:
   bloc:
   http:
+  flare_flutter:
+  google_fonts:
   flutter:
     sdk: flutter
 
@@ -23,3 +25,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/animated/
+    - assets/icons/

@@ -1,4 +1,6 @@
-import 'package:clean_architecture_movie/utils/constants.dart';
+import 'dart:convert';
+
+import 'package:clean_architecture_movie/utils/strings/constants.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:clean_architecture_movie/data/http/http_manager.dart';
@@ -18,7 +20,7 @@ class ThemovieDatasource implements MoviesDatasource {
     final response = await httpManager
         .get(url: '3/movie/upcoming', headers: {'Authorization': apiKey});
     if (response.statusCode == 200) {
-      return (response.data);
+      return Movie.fromJson(json.decode(response.data));
     } else {
       return throw GenericException();
     }

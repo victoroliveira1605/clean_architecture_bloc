@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 void main() async {
   configureDependencies();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(primarySwatch: Colors.blue, canvasColor: Colors.white),
     routes: AppPages.pages,
     home: SplashPage(),
