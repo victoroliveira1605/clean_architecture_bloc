@@ -20,8 +20,12 @@ class ServerException extends ConnectionExceptions {
   ServerException() : super();
 }
 
-class AppExceptions implements Exception {}
+class AppExceptions implements Exception {
+  final String error;
+  AppExceptions(this.error) : super();
+}
 
 class GenericException extends AppExceptions {
-  GenericException() : super();
+  final String error;
+  GenericException(this.error) : super(error);
 }

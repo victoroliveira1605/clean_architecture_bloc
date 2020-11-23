@@ -13,7 +13,8 @@ dependencies:
   bloc:
   http:
   flare_flutter:
-  google_fonts:
+  equatable:
+  json_serializable:
   flutter:
     sdk: flutter
 

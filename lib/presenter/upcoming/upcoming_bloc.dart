@@ -7,14 +7,26 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class UpcomingBloc extends Bloc<UpcomingEvent, UpcomingState> {
-  final UpcomingUseCase moviesUpcomingUseCase;
+  final UpcomingUseCase upcomingUseCase;
 
-  UpcomingBloc(this.moviesUpcomingUseCase) : super(UpcomingStartState());
+  UpcomingBloc(this.upcomingUseCase) : super(UpcomingStartState());
 
   @override
   Stream<UpcomingState> mapEventToState(UpcomingEvent event) async* {
+    switch (event.runtimeType) {
+      case FetchMovieListEvent:
+        yield* _fetchMovieList(event);
+        break;
+      default:
+        break;
+    }
+  }
+
+  Stream<UpcomingState> _fetchMovieList(FetchMovieListEvent event) async* {
     yield UpcomingLoadingState();
-    final result = await moviesUpcomingUseCase();
+
+    final result = await upcomingUseCase.getUpcomingList();
+
     yield result.fold((l) => UpcomingErrorState(error: l),
         (r) => UpcomingSuccessState(movie: r));
   }

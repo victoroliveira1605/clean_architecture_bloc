@@ -1,7 +1,7 @@
 import 'package:clean_architecture_movie/infra/datasources/movies_datasource.dart';
-import 'package:clean_architecture_movie/infra/models/result_movie.dart';
 import 'package:clean_architecture_movie/domain/exceptions/exceptions.dart';
 import 'package:clean_architecture_movie/domain/repositories/movies_repository.dart';
+import 'package:clean_architecture_movie/infra/models/movies.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,11 +12,17 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
   @override
   Future<Either<AppExceptions, Movie>> upcomingList() async {
+    Movie movies;
+
     try {
-      final result = await datasource.getUpcomingList(1, 'PT-br');
-      return Right(result);
+      movies = await datasource.getUpcomingList(1, 'pt-BR');
+      right(movies);
     } catch (e) {
-      return Left(AppExceptions());
+      return left(AppExceptions(e));
     }
+
+    return movies == null
+        ? left(AppExceptions('Movies is null'))
+        : right(movies);
   }
 }

@@ -21,10 +21,6 @@ class AppHttpManager implements HttpManager {
       final response = await http
           .get(_queryBuilder(url, query), headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
-      print('Api Get request url $url');
-      print('Api Get request key $headers');
-      print('request $response.request.headers');
-
       return _returnResponse(response);
     } on Exception catch (_) {
       throw NetworkException();
@@ -39,7 +35,6 @@ class AppHttpManager implements HttpManager {
     Map<String, String> headers,
   }) async {
     try {
-      print('Api Post request url $url, with $body');
       final response = await http
           .post(_queryBuilder(url, query),
               body: body != null ? json.encode(body) : null, headers: headers)
@@ -58,7 +53,6 @@ class AppHttpManager implements HttpManager {
     Map<String, String> headers,
   }) async {
     try {
-      print('Api Put request url $url, with $body');
       final response = await http
           .put(_queryBuilder(url, query),
               body: json.encode(body), headers: headers)
@@ -76,7 +70,6 @@ class AppHttpManager implements HttpManager {
     Map<String, String> headers,
   }) async {
     try {
-      print('Api Delete request url $url');
       final response = await http
           .delete(_queryBuilder(url, query), headers: headers)
           .timeout(timeout, onTimeout: () => throw TimeoutException());
@@ -100,12 +93,10 @@ class AppHttpManager implements HttpManager {
   }
 
   dynamic _returnResponse(http.Response response) {
-    final responseJson = json.decode(response.body.toString());
+    final responseJson = response.body;
     if (response.statusCode >= 200 && response.statusCode <= 299) {
-      print('Api response success with $responseJson');
       return responseJson;
     }
-    print('Api response error with ${response.statusCode} + ${response.body}');
     switch (response.statusCode) {
       case 400:
         throw BadRequestException();

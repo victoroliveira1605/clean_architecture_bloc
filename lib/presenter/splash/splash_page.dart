@@ -36,7 +36,7 @@ _onChangeScreen(BuildContext context) async {
   return await Future.delayed(
     Duration(seconds: 5),
     () {
-      Navigator.of(context).pushNamed(Routes.UPCOMING);
+      Navigator.of(context).pushNamed(Routes.HOME);
     },
   );
 }
