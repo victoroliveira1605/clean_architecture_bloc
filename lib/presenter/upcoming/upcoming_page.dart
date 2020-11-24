@@ -29,29 +29,63 @@ class _UpcomingPageState extends WidgetSate<UpcomingPage, UpcomingBloc> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Column(
-        children: [
-          StreamBuilder<Object>(
-              stream: controller,
-              builder: (context, snapshot) {
-                final state = controller.state;
-                if (state is UpcomingLoadingState) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+      body: StreamBuilder<Object>(
+          stream: controller,
+          builder: (context, snapshot) {
+            final state = controller.state;
+            if (state is UpcomingLoadingState) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            // return Container();
+            final list = (state as UpcomingSuccessState).movie.results;
+            return GridView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                itemCount: list.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3),
+                itemBuilder: (BuildContext context, int index) {
+                  return Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          height: 150,
+                          child: Image.network(
+                              'https://image.tmdb.org/t/p/w185/${list[index].posterPath}',
+                              fit: BoxFit.fill),
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: Container(
+                                margin: EdgeInsets.only(top: 6),
+                                child: Text(list[index].title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: whiteColor))))
+                      ],
+                    ),
                   );
-                }
-                return Container();
-                // final list = (state as UpcomingSuccessState).movie.results;
-                // return GridView.builder(
-                //     itemCount: list.length,
-                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //         crossAxisCount: 2),
-                //     itemBuilder: (BuildContext context, int index) {
-                //       return Text(list[index].originalTitle);
-                //     });
-              })
-        ],
-      ),
+                  // return Card(
+                  //   child: Column(
+                  //     children: [
+                  //       Expanded(
+                  //         child: Image.network(
+                  //           'https://image.tmdb.org/t/p/w185/${list[index].posterPath}',
+                  //           fit: BoxFit.contain,
+                  //         ),
+                  //       ),
+                  //       Expanded(child: Text(list[index].title))
+                  //     ],
+                  //   ),
+                  // );
+                });
+          }),
     );
   }
 }
