@@ -39,52 +39,67 @@ class _UpcomingPageState extends WidgetSate<UpcomingPage, UpcomingBloc> {
               );
             }
             // return Container();
-            final list = (state as UpcomingSuccessState).movie.results;
-            return GridView.builder(
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            try {
+              final list = (state as UpcomingSuccessState).movie.results;
+              return GridView.builder(
                 itemCount: list.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
+                    crossAxisCount: 2, mainAxisSpacing: 5),
                 itemBuilder: (BuildContext context, int index) {
-                  return Flexible(
+                  return Card(
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    color: secondColor,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
-                          height: 150,
-                          child: Image.network(
-                              'https://image.tmdb.org/t/p/w185/${list[index].posterPath}',
-                              fit: BoxFit.fill),
+                          margin: EdgeInsets.all(5),
+                          child: Text(
+                              list[index].releaseDate.day.toString() +
+                                  '/' +
+                                  list[index].releaseDate.month.toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: whiteColor)),
                         ),
                         Expanded(
-                            flex: 1,
-                            child: Container(
-                                margin: EdgeInsets.only(top: 6),
-                                child: Text(list[index].title,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: whiteColor))))
+                          child: Container(
+                            decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              alignment: FractionalOffset.topCenter,
+                              image: new NetworkImage(
+                                  'https://image.tmdb.org/t/p/w185/${list[index].posterPath}'),
+                            )),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(5),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                                text: list[index].title,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: whiteColor)),
+                          ),
+                        ),
                       ],
                     ),
                   );
-                  // return Card(
-                  //   child: Column(
-                  //     children: [
-                  //       Expanded(
-                  //         child: Image.network(
-                  //           'https://image.tmdb.org/t/p/w185/${list[index].posterPath}',
-                  //           fit: BoxFit.contain,
-                  //         ),
-                  //       ),
-                  //       Expanded(child: Text(list[index].title))
-                  //     ],
-                  //   ),
-                  // );
-                });
+                },
+              );
+            } catch (e) {
+              return Container();
+            }
           }),
     );
   }
