@@ -15,6 +15,9 @@ dependencies:
   flare_flutter:
   equatable:
   json_serializable:
+  scroll_snap_list:
+  flutter_svg:
+  animations:
   flutter:
     sdk: flutter
 

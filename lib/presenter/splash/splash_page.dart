@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
               width: 280,
               height: 280,
               child: FlareActor(
-                'assets/animated/PopCorn.flr',
+                'assets/animated/popcorn.flr',
                 animation: 'Go',
                 fit: BoxFit.contain,
               ),
@@ -36,7 +36,7 @@ _onChangeScreen(BuildContext context) async {
   return await Future.delayed(
     Duration(seconds: 5),
     () {
-      Navigator.of(context).pushNamed(Routes.HOME);
+      Navigator.of(context).pushNamed(Routes.MOVIES);
     },
   );
 }
