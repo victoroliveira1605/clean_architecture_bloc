@@ -7,25 +7,22 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_bloc:
   dartz:
   get_it:
-  injectable:
-  bloc:
   http:
   flare_flutter:
   equatable:
-  json_serializable:
   scroll_snap_list:
   flutter_svg:
   animations:
+  data_connection_checker:
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  injectable_generator:
-  build_runner:
 
 flutter:
   uses-material-design: true
