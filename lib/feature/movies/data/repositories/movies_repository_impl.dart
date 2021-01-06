@@ -15,10 +15,23 @@ class MoviesRepositoryImpl implements MoviesRepository {
       {@required this.moviesRemoteDatasource, @required this.networkInfo});
 
   @override
-  Future<Either<Failure, Movies>> getAllMovies() async {
+  Future<Either<Failure, Movies>> getAllNewShowing() async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(await moviesRemoteDatasource.getAllMovies());
+        return Right(await moviesRemoteDatasource.getAllNewShowing());
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Movies>> getAllSoon() async {
+    if (await networkInfo.isConnected) {
+      try {
+        return Right(await moviesRemoteDatasource.getAllSoon());
       } on ServerException {
         return Left(ServerFailure());
       }

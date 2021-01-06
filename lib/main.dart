@@ -16,7 +16,8 @@ void main() async {
     runApp(MultiBlocProvider(
       providers: [
         BlocProvider<MoviesBloc>(
-            create: (context) => getIt<MoviesBloc>()..add(GetMoviesEvent()))
+            create: (context) =>
+                getIt<MoviesBloc>()..add(GetAllNewShowingEvent()))
       ],
       child: MyApp(),
     ));

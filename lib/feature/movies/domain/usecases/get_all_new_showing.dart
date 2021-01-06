@@ -4,13 +4,13 @@ import 'package:clean_architecture_movie/feature/movies/domain/entities/movies.d
 import 'package:clean_architecture_movie/feature/movies/domain/repositories/movies_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class GetAllMovies implements UseCase<Movies, NoParams> {
+class GetAllNewShowing implements UseCase<Movies, NoParams> {
   final MoviesRepository moviesRepository;
 
-  GetAllMovies(this.moviesRepository);
+  GetAllNewShowing(this.moviesRepository);
 
   @override
   Future<Either<Failure, Movies>> call(NoParams params) async {
-    return await moviesRepository.getAllMovies();
+    return await moviesRepository.getAllNewShowing();
   }
 }

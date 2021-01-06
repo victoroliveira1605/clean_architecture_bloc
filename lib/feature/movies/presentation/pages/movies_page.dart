@@ -1,16 +1,15 @@
 import 'package:clean_architecture_movie/core/constants/app_color.dart';
+import 'package:clean_architecture_movie/core/constants/strings.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_state.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/category_list.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/movie_carousel.dart';
-import 'package:clean_architecture_movie/core/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MoviesPage extends StatelessWidget {
   const MoviesPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

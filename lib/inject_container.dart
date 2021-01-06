@@ -2,7 +2,8 @@ import 'package:clean_architecture_movie/core/network/network_info.dart';
 import 'package:clean_architecture_movie/feature/movies/data/data_source/movies_remote_data_source.dart';
 import 'package:clean_architecture_movie/feature/movies/data/repositories/movies_repository_impl.dart';
 import 'package:clean_architecture_movie/feature/movies/domain/repositories/movies_repository.dart';
-import 'package:clean_architecture_movie/feature/movies/domain/usecases/get_all_movies.dart';
+import 'package:clean_architecture_movie/feature/movies/domain/usecases/get_all_new_showing.dart';
+import 'package:clean_architecture_movie/feature/movies/domain/usecases/get_all_soon.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
@@ -15,13 +16,18 @@ Future<void> init() async {
   // Bloc
   getIt.registerFactory<MoviesBloc>(
     () => MoviesBloc(
-      getAllMovies: getIt(),
+      getAllNewShowing: getIt(),
+      getAllSoon: getIt(),
     ),
   );
 
   // Use cases
   getIt.registerLazySingleton(
-    () => GetAllMovies(getIt()),
+    () => GetAllNewShowing(getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => GetAllSoon(getIt()),
   );
 
   // Repository

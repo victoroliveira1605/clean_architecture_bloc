@@ -8,7 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MoviesRemoteDataSource {
-  Future<Movies> getAllMovies();
+  Future<Movies> getAllNewShowing();
+  Future<Movies> getAllSoon();
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -17,10 +18,26 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   MoviesRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<Movies> getAllMovies() =>
-      _getMoviesFromUrl(url + '3/movie/upcoming', {'Authorization': key});
+  Future<Movies> getAllNewShowing() =>
+      _getNewShowingFromUrl(url + '3/movie/upcoming', {'Authorization': key});
 
-  Future<MoviesModel> _getMoviesFromUrl(
+  Future<MoviesModel> _getNewShowingFromUrl(
+      String url, Map<String, String> headers) async {
+    final response = await client.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      final decodedJson = json.decode(response.body);
+      return MoviesModel.fromJson(decodedJson);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<Movies> getAllSoon() =>
+      _getSoonFromUrl(url + '3/movie/upcoming', {'Authorization': key});
+
+  Future<MoviesModel> _getSoonFromUrl(
       String url, Map<String, String> headers) async {
     final response = await client.get(url, headers: headers);
 

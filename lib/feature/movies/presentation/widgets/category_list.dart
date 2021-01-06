@@ -1,6 +1,9 @@
 import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/core/constants/strings.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Categorylist extends StatefulWidget {
   @override
@@ -31,6 +34,9 @@ class _CategorylistState extends State<Categorylist> {
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: GestureDetector(
         onTap: () {
+          BlocProvider.of<MoviesBloc>(context).add(
+            GetAllSoonEvent(),
+          );
           setState(() {
             selectedCategory = index;
           });

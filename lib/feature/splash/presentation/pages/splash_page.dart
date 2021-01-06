@@ -34,7 +34,7 @@ class SplashPage extends StatelessWidget {
 
 _onChangeScreen(BuildContext context) async {
   return await Future.delayed(
-    Duration(seconds: 5),
+    Duration(seconds: 3),
     () {
       Navigator.of(context).pushNamed(Routes.MOVIES);
     },

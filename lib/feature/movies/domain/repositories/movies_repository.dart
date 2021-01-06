@@ -3,5 +3,6 @@ import 'package:clean_architecture_movie/feature/movies/domain/entities/movies.d
 import 'package:dartz/dartz.dart';
 
 abstract class MoviesRepository {
-  Future<Either<Failure, Movies>> getAllMovies();
+  Future<Either<Failure, Movies>> getAllNewShowing();
+  Future<Either<Failure, Movies>> getAllSoon();
 }
