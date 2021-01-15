@@ -2,14 +2,21 @@ import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/core/constants/strings.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_state.dart';
-import 'package:clean_architecture_movie/feature/movies/presentation/widgets/category_list.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/widgets/category.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/movie_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-class MoviesPage extends StatelessWidget {
+class MoviesPage extends StatefulWidget {
   const MoviesPage({Key key}) : super(key: key);
+
+  @override
+  _MoviesPageState createState() => _MoviesPageState();
+}
+
+class _MoviesPageState extends State<MoviesPage> {
+  int selected = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +34,15 @@ class MoviesPage extends StatelessWidget {
               return SingleChildScrollView(
                   child: Column(
                 children: <Widget>[
-                  Categorylist(),
+                  Category(
+                    onSelectChange: (int index) {
+                      setState(() {
+                        selected = index;
+                        print(selected);
+                      });
+                    },
+                    selected: selected,
+                  ),
                   // Genres(),
                   SizedBox(height: kDefaultPadding),
                   MovieCarousel(

@@ -1,21 +1,13 @@
 import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/core/constants/strings.dart';
-import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
-import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_event.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Categorylist extends StatefulWidget {
-  @override
-  _CategorylistState createState() => _CategorylistState();
-}
+class Category extends StatelessWidget {
+  final int selected;
+  final Function(int) onSelectChange;
 
-class _CategorylistState extends State<Categorylist> {
-  int selectedCategory = 0;
-  List<String> categories = [
-    "Em exibição",
-    "Em breve",
-  ];
+  const Category({@required this.selected, this.onSelectChange});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +15,7 @@ class _CategorylistState extends State<Categorylist> {
       height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: 2,
         itemBuilder: (context, index) => buildCategory(index, context),
       ),
     );
@@ -33,22 +25,18 @@ class _CategorylistState extends State<Categorylist> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: GestureDetector(
-        onTap: () {
-          BlocProvider.of<MoviesBloc>(context).add(
-            GetAllSoonEvent(),
-          );
-          setState(() {
-            selectedCategory = index;
-          });
-        },
+        onTap: () => onSelectChange(index),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              categories[index],
+              [
+                "Em exibição",
+                "Em breve",
+              ][index],
               style: Theme.of(context).textTheme.headline5.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: index == selectedCategory
+                    color: index == selected
                         ? whiteColor
                         : whiteColor.withOpacity(0.4),
                   ),
@@ -59,8 +47,7 @@ class _CategorylistState extends State<Categorylist> {
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color:
-                    index == selectedCategory ? whiteColor : Colors.transparent,
+                color: index == selected ? whiteColor : Colors.transparent,
               ),
             )
           ],
