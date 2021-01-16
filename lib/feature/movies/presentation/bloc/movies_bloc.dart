@@ -14,7 +14,6 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
 
   @override
   Stream<MoviesState> mapEventToState(MoviesEvent event) async* {
-    print(event);
     if (event is GetAllNewShowingEvent) {
       print('GetNewShowingEvent : called');
       yield MoviesLoadingState();

@@ -1,6 +1,8 @@
 import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/core/constants/strings.dart';
+import 'package:clean_architecture_movie/feature/movies/domain/entities/movies_enum.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_event.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_state.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/category.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/movie_carousel.dart';
@@ -38,7 +40,13 @@ class _MoviesPageState extends State<MoviesPage> {
                     onSelectChange: (int index) {
                       setState(() {
                         selected = index;
-                        print(selected);
+                        if (selected == MoviesEnum.SOON.index) {
+                          BlocProvider.of<MoviesBloc>(context)
+                              .add(GetAllSoonEvent());
+                        } else {
+                          BlocProvider.of<MoviesBloc>(context)
+                              .add(GetAllNewShowingEvent());
+                        }
                       });
                     },
                     selected: selected,

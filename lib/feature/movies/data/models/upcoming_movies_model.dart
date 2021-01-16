@@ -1,10 +1,10 @@
 import 'package:clean_architecture_movie/feature/movies/data/models/dates_model.dart';
 import 'package:clean_architecture_movie/feature/movies/data/models/result._model.dart';
-import 'package:clean_architecture_movie/feature/movies/domain/entities/movies.dart';
+import 'package:clean_architecture_movie/feature/movies/domain/entities/upcoming.dart';
 import 'package:flutter/material.dart';
 
-class MoviesModel extends Movies {
-  MoviesModel({
+class UpcomingMoviesModel extends Upcoming {
+  UpcomingMoviesModel({
     @required results,
     @required page,
     @required totalResults,
@@ -17,7 +17,8 @@ class MoviesModel extends Movies {
             dates: dates,
             totalPages: totalPages);
 
-  factory MoviesModel.fromJson(Map<String, dynamic> json) => MoviesModel(
+  factory UpcomingMoviesModel.fromJson(Map<String, dynamic> json) =>
+      UpcomingMoviesModel(
         results: List<ResultModel>.from(
             json["results"].map((x) => ResultModel.fromJson(x))),
         page: json["page"],
