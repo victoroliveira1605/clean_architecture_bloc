@@ -1,16 +1,22 @@
-# clean_architecture_movie
+# Movies
 
-A new Flutter project.
+- Arquitetura: Clean.
+- Linguagem: Dart.
 
-## Getting Started
+## Demo
 
-This project is a starting point for a Flutter application.
+![Farmers Market Finder Demo](demo/movie-clean.gif)
 
-A few resources to get you started if this is your first Flutter project:
+## Soluções técnicas
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Data
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-
+
+### Domain
+
+-
+
+### Presentation
+
+-
