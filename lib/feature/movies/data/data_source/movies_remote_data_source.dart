@@ -10,8 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MoviesRemoteDataSource {
-  Future<Popular> getAllNewShowing();
-  Future<Upcoming> getAllSoon();
+  Future<Popular> getAllNewShowing(int page);
+  Future<Upcoming> getAllSoon(int page);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -20,8 +20,8 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   MoviesRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<Popular> getAllNewShowing() =>
-      _getNewShowingFromUrl(url + '3/movie/popular', {'Authorization': key});
+  Future<Popular> getAllNewShowing(int page) => _getNewShowingFromUrl(
+      url + '3/movie/popular?page=$page', {'Authorization': key});
 
   Future<PopularMoviesModel> _getNewShowingFromUrl(
       String url, Map<String, String> headers) async {
@@ -36,8 +36,8 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   }
 
   @override
-  Future<Upcoming> getAllSoon() =>
-      _getSoonFromUrl(url + '3/movie/upcoming', {'Authorization': key});
+  Future<Upcoming> getAllSoon(int page) => _getSoonFromUrl(
+      url + '3/movie/upcoming?page=$page', {'Authorization': key});
 
   Future<UpcomingMoviesModel> _getSoonFromUrl(
       String url, Map<String, String> headers) async {

@@ -1,14 +1,14 @@
 import 'package:clean_architecture_movie/core/constants/app_color.dart';
-import 'package:clean_architecture_movie/core/constants/strings.dart';
+import 'package:clean_architecture_movie/feature/movies/data/models/result._model.dart';
 import 'package:clean_architecture_movie/feature/movies/domain/entities/movies_enum.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_bloc.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_event.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/bloc/movies_state.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/widgets/app_bar.dart';
+import 'package:clean_architecture_movie/feature/movies/presentation/widgets/card_movie.dart';
 import 'package:clean_architecture_movie/feature/movies/presentation/widgets/category.dart';
-import 'package:clean_architecture_movie/feature/movies/presentation/widgets/movie_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({Key key}) : super(key: key);
@@ -18,77 +18,81 @@ class MoviesPage extends StatefulWidget {
 }
 
 class _MoviesPageState extends State<MoviesPage> {
-  int selected = 0;
+  int _selected = 0;
+  final List<ResultModel> _movies = [];
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: primaryColor,
         appBar: appbar(),
-        body: BlocBuilder<MoviesBloc, MoviesState>(
+        body: BlocConsumer<MoviesBloc, MoviesState>(
+          listener: (context, state) {
+            if (state is MoviesLoadingState) {
+              return Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text('Carregando...')));
+            } else if (state is MoviesLoadFailedState) {
+              return Scaffold.of(context)
+                  .showSnackBar(SnackBar(content: Text('Falha ao carregar !')));
+            }
+          },
           builder: (context, state) {
-            if (state is MoviesInitialState) {
-              return Container();
-            } else if (state is MoviesLoadingState) {
+            if (state is MoviesInitialState ||
+                state is MoviesLoadingState && _movies.isEmpty) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is MoviesLoadSuccessState) {
-              return SingleChildScrollView(
-                  child: Column(
-                children: <Widget>[
-                  Category(
-                    onSelectChange: (int index) {
-                      setState(() {
-                        selected = index;
-                        if (selected == MoviesEnum.SOON.index) {
-                          BlocProvider.of<MoviesBloc>(context)
-                              .add(GetAllSoonEvent());
-                        } else {
-                          BlocProvider.of<MoviesBloc>(context)
-                              .add(GetAllNewShowingEvent());
-                        }
-                      });
-                    },
-                    selected: selected,
-                  ),
-                  // Genres(),
-                  SizedBox(height: kDefaultPadding),
-                  MovieCarousel(
-                    movies: state.movies.results,
-                  ),
-                ],
-              ));
-            } else if (state is MoviesLoadFailedState) {
-              return Center(child: Text('Falha ao carregar'));
-            } else {
-              return Center(child: Text('Unexpected State'));
+              _movies.addAll(state.movies.results);
+              context.bloc<MoviesBloc>().isFetching = false;
             }
+            return Column(
+              children: [
+                Category(
+                  onSelectChange: (int index) {
+                    setState(() {
+                      _selected = index;
+                      _movies.clear();
+                      context.bloc<MoviesBloc>()..page = 1;
+                      context.bloc<MoviesBloc>()
+                        ..isFetching = true
+                        ..add(_selected == MoviesEnum.SOON.index
+                            ? GetAllSoonEvent()
+                            : GetAllNewShowingEvent());
+                    });
+                  },
+                  selected: _selected,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _movies.length,
+                    controller: _scrollController
+                      ..addListener(() {
+                        if (_scrollController.offset ==
+                                _scrollController.position.maxScrollExtent &&
+                            !context.bloc<MoviesBloc>().isFetching) {
+                          nextPage(context);
+                        }
+                      }),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => CardMovie(
+                      item: _movies[index],
+                    ),
+                  ),
+                ),
+              ],
+            );
           },
         ));
   }
 
-  AppBar appbar() {
-    return AppBar(
-      backgroundColor: primaryColor,
-      elevation: 0,
-      leading: IconButton(
-        padding: EdgeInsets.only(left: kDefaultPadding),
-        icon: SvgPicture.asset(
-          "assets/icons/menu.svg",
-          color: whiteColor,
-        ),
-        onPressed: () {},
-      ),
-      actions: <Widget>[
-        IconButton(
-          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-          icon: SvgPicture.asset(
-            "assets/icons/search.svg",
-            color: whiteColor,
-          ),
-          onPressed: () {},
-        ),
-      ],
-    );
+  void nextPage(BuildContext context) {
+    context.bloc<MoviesBloc>()..page = context.bloc<MoviesBloc>().page + 1;
+    context.bloc<MoviesBloc>()
+      ..isFetching = true
+      ..add(_selected == MoviesEnum.SOON.index
+          ? GetAllSoonEvent()
+          : GetAllNewShowingEvent());
   }
 }

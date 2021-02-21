@@ -16,10 +16,10 @@ class MoviesRepositoryImpl implements MoviesRepository {
       {@required this.moviesRemoteDatasource, @required this.networkInfo});
 
   @override
-  Future<Either<Failure, Popular>> getAllNewShowing() async {
+  Future<Either<Failure, Popular>> getAllNewShowing(int page) async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(await moviesRemoteDatasource.getAllNewShowing());
+        return Right(await moviesRemoteDatasource.getAllNewShowing(page));
       } on ServerException {
         return Left(ServerFailure());
       }
@@ -29,10 +29,10 @@ class MoviesRepositoryImpl implements MoviesRepository {
   }
 
   @override
-  Future<Either<Failure, Upcoming>> getAllSoon() async {
+  Future<Either<Failure, Upcoming>> getAllSoon(int page) async {
     if (await networkInfo.isConnected) {
       try {
-        return Right(await moviesRemoteDatasource.getAllSoon());
+        return Right(await moviesRemoteDatasource.getAllSoon(page));
       } on ServerException {
         return Left(ServerFailure());
       }

@@ -10,3 +10,8 @@ class NoParams extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class Page extends Equatable {
+  @override
+  List<Object> get props => [int];
+}
