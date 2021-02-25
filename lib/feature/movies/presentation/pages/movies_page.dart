@@ -45,7 +45,7 @@ class _MoviesPageState extends State<MoviesPage> {
               );
             } else if (state is MoviesLoadSuccessState) {
               _movies.addAll(state.movies.results);
-              context.bloc<MoviesBloc>().isFetching = false;
+              context.watch<MoviesBloc>().isFetching = false;
             }
             return Column(
               children: [
@@ -54,8 +54,8 @@ class _MoviesPageState extends State<MoviesPage> {
                     setState(() {
                       _selected = index;
                       _movies.clear();
-                      context.bloc<MoviesBloc>()..page = 1;
-                      context.bloc<MoviesBloc>()
+                      context.watch<MoviesBloc>()..page = 1;
+                      context.watch<MoviesBloc>()
                         ..isFetching = true
                         ..add(_selected == MoviesEnum.SOON.index
                             ? GetAllSoonEvent()
@@ -71,8 +71,14 @@ class _MoviesPageState extends State<MoviesPage> {
                       ..addListener(() {
                         if (_scrollController.offset ==
                                 _scrollController.position.maxScrollExtent &&
-                            !context.bloc<MoviesBloc>().isFetching) {
-                          nextPage(context);
+                            !context.read<MoviesBloc>().isFetching) {
+                          context.read<MoviesBloc>()
+                            ..page = context.read<MoviesBloc>().page + 1;
+                          context.read<MoviesBloc>()
+                            ..isFetching = true
+                            ..add(_selected == MoviesEnum.SOON.index
+                                ? GetAllSoonEvent()
+                                : GetAllNewShowingEvent());
                         }
                       }),
                     scrollDirection: Axis.horizontal,
@@ -85,14 +91,5 @@ class _MoviesPageState extends State<MoviesPage> {
             );
           },
         ));
-  }
-
-  void nextPage(BuildContext context) {
-    context.bloc<MoviesBloc>()..page = context.bloc<MoviesBloc>().page + 1;
-    context.bloc<MoviesBloc>()
-      ..isFetching = true
-      ..add(_selected == MoviesEnum.SOON.index
-          ? GetAllSoonEvent()
-          : GetAllNewShowingEvent());
   }
 }

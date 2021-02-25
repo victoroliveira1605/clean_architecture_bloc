@@ -1,6 +1,6 @@
 import 'package:clean_architecture_movie/feature/movies/domain/entities/original_language.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Result extends Equatable {
   Result({
@@ -33,7 +33,7 @@ class Result extends Equatable {
   final String title;
   final double voteAverage;
   final String overview;
-  final DateTime releaseDate;
+  final String releaseDate;
 
   @override
   List<Object> get props => [
