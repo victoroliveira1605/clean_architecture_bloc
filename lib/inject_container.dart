@@ -1,4 +1,9 @@
 import 'package:clean_architecture_movie/core/network/network_info.dart';
+import 'package:clean_architecture_movie/feature/detail/data/data_source/detail_remote_data_source.dart';
+import 'package:clean_architecture_movie/feature/detail/data/repositories/detail_repository_impl.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/repositories/detail_repository.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/usecases/get_cast_crew.dart';
+import 'package:clean_architecture_movie/feature/detail/presentation/bloc/detail_bloc.dart';
 import 'package:clean_architecture_movie/feature/movies/data/data_source/movies_remote_data_source.dart';
 import 'package:clean_architecture_movie/feature/movies/data/repositories/movies_repository_impl.dart';
 import 'package:clean_architecture_movie/feature/movies/domain/repositories/movies_repository.dart';
@@ -20,6 +25,11 @@ Future<void> init() async {
       getAllSoon: getIt(),
     ),
   );
+  getIt.registerFactory<DetailBloc>(
+    () => DetailBloc(
+      getCastCrew: getIt(),
+    ),
+  );
 
   // Use cases
   getIt.registerLazySingleton(
@@ -29,6 +39,9 @@ Future<void> init() async {
   getIt.registerLazySingleton(
     () => GetAllSoon(getIt()),
   );
+  getIt.registerLazySingleton(
+    () => GetCastCrew(getIt()),
+  );
 
   // Repository
   getIt.registerLazySingleton<MoviesRepository>(
@@ -37,10 +50,19 @@ Future<void> init() async {
       networkInfo: getIt(),
     ),
   );
+  getIt.registerLazySingleton<DetailRepository>(
+    () => DetailRepositoryImpl(
+      detailRemoteDatasource: getIt(),
+      networkInfo: getIt(),
+    ),
+  );
 
   // Data sources
   getIt.registerLazySingleton<MoviesRemoteDataSource>(
     () => MoviesRemoteDataSourceImpl(client: getIt()),
+  );
+  getIt.registerLazySingleton<DetailRemoteDataSource>(
+    () => DetailRemoteDataSourceImpl(client: getIt()),
   );
 
   //! Core

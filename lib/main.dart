@@ -17,7 +17,7 @@ void main() async {
       providers: [
         BlocProvider<MoviesBloc>(
             create: (context) =>
-                getIt<MoviesBloc>()..add(GetAllNewShowingEvent()))
+                getIt<MoviesBloc>()..add(GetAllNewShowingEvent())),
       ],
       child: MyApp(),
     ));
