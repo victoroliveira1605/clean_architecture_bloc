@@ -3,6 +3,7 @@ import 'package:clean_architecture_movie/core/exceptions/exceptions.dart';
 import 'package:clean_architecture_movie/core/network/network_info.dart';
 import 'package:clean_architecture_movie/feature/detail/data/data_source/detail_remote_data_source.dart';
 import 'package:clean_architecture_movie/feature/detail/domain/entities/credits.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/entities/detail.dart';
 import 'package:clean_architecture_movie/feature/detail/domain/repositories/detail_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,19 @@ class DetailRepositoryImpl implements DetailRepository {
     if (await networkInfo.isConnected) {
       try {
         return Right(await detailRemoteDatasource.getCastCrew(id));
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Detail>> getDetail(int id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        return Right(await detailRemoteDatasource.getDetail(id));
       } on ServerException {
         return Left(ServerFailure());
       }

@@ -11,50 +11,54 @@ class CastAndCrew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(kDefaultPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "Cast & Crew",
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          SizedBox(height: kDefaultPadding),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: cast.length,
-              itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.only(right: kDefaultPadding),
-                width: 80,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 80,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://image.tmdb.org/t/p/original/${cast[index].profilePath}'),
-                        ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: 40, left: 20, bottom: 20),
+          child: Text("Elenco",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold)),
+        ),
+        SizedBox(
+          height: 160,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: cast.length,
+            itemBuilder: (context, index) => Container(
+              margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              width: 80,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://image.tmdb.org/t/p/original/${cast[index].profilePath}'),
                       ),
                     ),
-                    SizedBox(height: kDefaultPadding / 2),
-                    Text(
-                      cast[index].originalName,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: kDefaultPadding / 2),
+                  Text(
+                    cast[index].originalName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                    maxLines: 2,
+                  ),
+                ],
               ),
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

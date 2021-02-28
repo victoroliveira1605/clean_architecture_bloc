@@ -3,6 +3,8 @@ import 'package:clean_architecture_movie/feature/detail/data/data_source/detail_
 import 'package:clean_architecture_movie/feature/detail/data/repositories/detail_repository_impl.dart';
 import 'package:clean_architecture_movie/feature/detail/domain/repositories/detail_repository.dart';
 import 'package:clean_architecture_movie/feature/detail/domain/usecases/get_cast_crew.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/usecases/get_detail.dart';
+import 'package:clean_architecture_movie/feature/detail/presentation/bloc/credit_bloc.dart';
 import 'package:clean_architecture_movie/feature/detail/presentation/bloc/detail_bloc.dart';
 import 'package:clean_architecture_movie/feature/movies/data/data_source/movies_remote_data_source.dart';
 import 'package:clean_architecture_movie/feature/movies/data/repositories/movies_repository_impl.dart';
@@ -25,9 +27,14 @@ Future<void> init() async {
       getAllSoon: getIt(),
     ),
   );
+  getIt.registerFactory<CreditBloc>(
+    () => CreditBloc(
+      getCastCrew: getIt(),
+    ),
+  );
   getIt.registerFactory<DetailBloc>(
     () => DetailBloc(
-      getCastCrew: getIt(),
+      getDetail: getIt(),
     ),
   );
 
@@ -39,8 +46,13 @@ Future<void> init() async {
   getIt.registerLazySingleton(
     () => GetAllSoon(getIt()),
   );
+
   getIt.registerLazySingleton(
     () => GetCastCrew(getIt()),
+  );
+
+  getIt.registerLazySingleton(
+    () => GetDetail(getIt()),
   );
 
   // Repository

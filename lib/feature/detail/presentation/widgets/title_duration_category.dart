@@ -1,12 +1,13 @@
+import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/core/constants/strings.dart';
-import 'package:clean_architecture_movie/feature/movies/domain/entities/result.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/entities/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TitleDurationCategory extends StatelessWidget {
-  final Result movie;
+  final Detail detail;
 
-  const TitleDurationCategory({Key key, @required this.movie})
+  const TitleDurationCategory({Key key, @required this.detail})
       : super(key: key);
 
   @override
@@ -20,7 +21,7 @@ class TitleDurationCategory extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  movie.title,
+                  detail.title,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 26,
@@ -31,8 +32,9 @@ class TitleDurationCategory extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       DateFormat("yyyy").format(
-                          DateFormat("yyyy-MM-dd").parse(movie.releaseDate)),
-                      style: TextStyle(color: Color(0xFF9A9BB2)),
+                          DateFormat("yyyy-MM-dd").parse(detail.releaseDate)),
+                      style: TextStyle(
+                          color: textAceent, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: kDefaultPadding),
                     // Text(
@@ -41,8 +43,9 @@ class TitleDurationCategory extends StatelessWidget {
                     // ),
                     // SizedBox(width: kDefaultPadding),
                     Text(
-                      "2h 32min",
-                      style: TextStyle(color: Color(0xFF9A9BB2)),
+                      detail.runtime.toString() + ' min',
+                      style: TextStyle(
+                          color: textAceent, fontWeight: FontWeight.bold),
                     ),
                   ],
                 )

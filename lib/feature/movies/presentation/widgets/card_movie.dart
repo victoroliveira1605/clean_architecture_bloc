@@ -24,16 +24,27 @@ class CardMovie extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [kDefaultShadow],
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500/${item.posterPath}'),
-                      ),
-                    ),
-                  ),
+                  child: item.posterPath != null
+                      ? Container(
+                          child: Image.network(
+                            'https://image.tmdb.org/t/p/w500/${item.posterPath}',
+                            fit: BoxFit.fill,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : Container(),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10),

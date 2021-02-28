@@ -1,3 +1,4 @@
+import 'package:clean_architecture_movie/core/constants/app_color.dart';
 import 'package:clean_architecture_movie/feature/movies/domain/entities/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +70,7 @@ class BackdropAndRating extends StatelessWidget {
                         TextSpan(text: "10\n"),
                         TextSpan(
                           text: "${movie.voteCount}",
-                          style: TextStyle(color: Color(0xFF9A9BB2)),
+                          style: TextStyle(color: textSecundary),
                         ),
                       ],
                     ),

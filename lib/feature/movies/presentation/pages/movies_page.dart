@@ -54,8 +54,8 @@ class _MoviesPageState extends State<MoviesPage> {
                     setState(() {
                       _selected = index;
                       _movies.clear();
-                      context.watch<MoviesBloc>()..page = 1;
-                      context.watch<MoviesBloc>()
+                      context.read<MoviesBloc>()..page = 1;
+                      context.read<MoviesBloc>()
                         ..isFetching = true
                         ..add(_selected == MoviesEnum.SOON.index
                             ? GetAllSoonEvent()

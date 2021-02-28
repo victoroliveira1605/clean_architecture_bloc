@@ -1,4 +1,4 @@
-import 'package:clean_architecture_movie/feature/detail/domain/entities/credits.dart';
+import 'package:clean_architecture_movie/feature/detail/domain/entities/detail.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class DetailState extends Equatable {
@@ -13,9 +13,9 @@ class DetailInitialState extends DetailState {}
 class DetailLoadingState extends DetailState {}
 
 class DetailLoadSuccessState extends DetailState {
-  final Credits credits;
+  final Detail detail;
 
-  DetailLoadSuccessState({this.credits});
+  DetailLoadSuccessState({this.detail});
 
   @override
   List<Object> get props => [];
