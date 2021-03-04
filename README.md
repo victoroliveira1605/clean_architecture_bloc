@@ -7,16 +7,4 @@
 
 ![Farmers Market Finder Demo](demo/movie-clean.gif)
 
-## Soluções técnicas
 
-### Data
-
--
-
-### Domain
-
--
-
-### Presentation
-
--
