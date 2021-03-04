@@ -15,7 +15,7 @@ dependencies:
   flare_flutter:
   equatable:
   scroll_snap_list:
-  flutter_svg:
+  flutter_svg: ^0.21.0-nullsafety.0
   animations:
   data_connection_checker:
   flutter:

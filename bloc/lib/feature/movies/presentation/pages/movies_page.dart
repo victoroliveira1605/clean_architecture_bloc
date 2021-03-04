@@ -30,10 +30,10 @@ class _MoviesPageState extends State<MoviesPage> {
         body: BlocConsumer<MoviesBloc, MoviesState>(
           listener: (context, state) {
             if (state is MoviesLoadingState) {
-              return Scaffold.of(context)
+              return ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text('Carregando...')));
             } else if (state is MoviesLoadFailedState) {
-              return Scaffold.of(context)
+              return ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text('Falha ao carregar !')));
             }
           },

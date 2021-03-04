@@ -54,7 +54,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     if (state is DetailLoadingState) {
                       return CircularProgressIndicator();
                     } else if (state is DetailLoadFailedState) {
-                      return Scaffold.of(context).showSnackBar(
+                      return ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Falha ao carregar !')));
                     }
                   },
@@ -79,7 +79,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     if (state is CreditLoadingState) {
                       return CircularProgressIndicator();
                     } else if (state is CreditLoadFailedState) {
-                      return Scaffold.of(context).showSnackBar(
+                      return ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Falha ao carregar !')));
                     }
                   },
