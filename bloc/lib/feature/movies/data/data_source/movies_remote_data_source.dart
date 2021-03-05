@@ -6,7 +6,6 @@ import 'package:clean_architecture_bloc/feature/movies/data/models/popular_movie
 import 'package:clean_architecture_bloc/feature/movies/data/models/upcoming_movies_model.dart';
 import 'package:clean_architecture_bloc/feature/movies/domain/entities/popular.dart';
 import 'package:clean_architecture_bloc/feature/movies/domain/entities/upcoming.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MoviesRemoteDataSource {
@@ -17,14 +16,15 @@ abstract class MoviesRemoteDataSource {
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
   final http.Client client;
 
-  MoviesRemoteDataSourceImpl({@required this.client});
+  MoviesRemoteDataSourceImpl({required this.client});
 
   @override
   Future<Popular> getAllNewShowing(int page) => _getNewShowingFromUrl(
-      url + '3/movie/popular?page=$page', {'Authorization': key});
+      Uri.https(url, '/3/movie/popular', {'page': '$page'}),
+      {'Authorization': key});
 
   Future<PopularMoviesModel> _getNewShowingFromUrl(
-      String url, Map<String, String> headers) async {
+      Uri url, Map<String, String> headers) async {
     final response = await client.get(url, headers: headers);
 
     if (response.statusCode == 200) {
@@ -37,10 +37,11 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
 
   @override
   Future<Upcoming> getAllSoon(int page) => _getSoonFromUrl(
-      url + '3/movie/upcoming?page=$page', {'Authorization': key});
+      Uri.https(url, '/3/movie/upcoming', {'page': '$page'}),
+      {'Authorization': key});
 
   Future<UpcomingMoviesModel> _getSoonFromUrl(
-      String url, Map<String, String> headers) async {
+      Uri url, Map<String, String> headers) async {
     final response = await client.get(url, headers: headers);
 
     if (response.statusCode == 200) {

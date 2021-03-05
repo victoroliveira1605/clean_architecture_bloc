@@ -1,14 +1,20 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
-
 abstract class NetworkInfo {
-  Future<bool> get isConnected;
+  // Future<bool> get isConnected;
 }
 
 class NetworkInfoImpl implements NetworkInfo {
-  final DataConnectionChecker connectionChecker;
+  // final Connectivity _connectivity;
 
-  NetworkInfoImpl(this.connectionChecker);
+  // NetworkInfoImpl(this._connectivity);
 
-  @override
-  Future<bool> get isConnected => connectionChecker.hasConnection;
+  // @override
+  // Future<bool> get isConnected async {
+  //   var connectivityResult = await (_connectivity.checkConnectivity());
+  //   if (connectivityResult == ConnectivityResult.mobile) {
+  //     return true;
+  //   } else if (connectivityResult == ConnectivityResult.wifi) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }

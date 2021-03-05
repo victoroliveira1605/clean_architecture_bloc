@@ -15,7 +15,7 @@ class CreditLoadingState extends CreditState {}
 class CreditsLoadSuccessState extends CreditState {
   final Credits credits;
 
-  CreditsLoadSuccessState({this.credits});
+  CreditsLoadSuccessState({required this.credits});
 
   @override
   List<Object> get props => [];

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Synope extends StatelessWidget {
   final String synope;
-  const Synope({Key key, this.synope}) : super(key: key);
+  const Synope({Key? key, required this.synope}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

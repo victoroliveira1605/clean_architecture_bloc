@@ -1,15 +1,14 @@
 import 'package:clean_architecture_bloc/feature/movies/data/models/dates_model.dart';
 import 'package:clean_architecture_bloc/feature/movies/data/models/result._model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Upcoming extends Equatable {
   Upcoming({
-    @required this.results,
-    @required this.page,
-    @required this.totalResults,
-    @required this.dates,
-    @required this.totalPages,
+    required this.results,
+    required this.page,
+    required this.totalResults,
+    required this.dates,
+    required this.totalPages,
   });
 
   final List<ResultModel> results;

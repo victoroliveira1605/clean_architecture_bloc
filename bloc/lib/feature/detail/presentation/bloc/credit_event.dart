@@ -9,7 +9,7 @@ abstract class CreditEvent extends Equatable {
 
 class GetCastCrewEvent extends CreditEvent {
   final int id;
-  GetCastCrewEvent({this.id});
+  GetCastCrewEvent({required this.id});
 
   @override
   List<Object> get props => [id];

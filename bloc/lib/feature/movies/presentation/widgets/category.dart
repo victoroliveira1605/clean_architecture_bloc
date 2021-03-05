@@ -6,7 +6,7 @@ class Category extends StatelessWidget {
   final int selected;
   final Function(int) onSelectChange;
 
-  const Category({@required this.selected, this.onSelectChange});
+  const Category({required this.selected, required this.onSelectChange});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class Category extends StatelessWidget {
                 "Em exibição",
                 "Em breve",
               ][index],
-              style: Theme.of(context).textTheme.headline5.copyWith(
+              style: Theme.of(context).textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.w600,
                     color: index == selected
                         ? whiteColor

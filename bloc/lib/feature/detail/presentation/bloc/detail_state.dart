@@ -15,7 +15,7 @@ class DetailLoadingState extends DetailState {}
 class DetailLoadSuccessState extends DetailState {
   final Detail detail;
 
-  DetailLoadSuccessState({this.detail});
+  DetailLoadSuccessState({required this.detail});
 
   @override
   List<Object> get props => [];

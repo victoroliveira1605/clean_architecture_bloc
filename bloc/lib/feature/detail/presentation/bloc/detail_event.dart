@@ -9,7 +9,7 @@ abstract class DetailEvent extends Equatable {
 
 class GetDetailEvent extends DetailEvent {
   final int id;
-  GetDetailEvent({this.id});
+  GetDetailEvent({required this.id});
 
   @override
   List<Object> get props => [id];

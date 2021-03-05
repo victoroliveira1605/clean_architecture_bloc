@@ -50,7 +50,7 @@ class CrewModel extends Crew {
         "name": name,
         "original_name": originalName,
         "popularity": popularity,
-        "profile_path": profilePath == null ? null : profilePath,
+        "profile_path": profilePath,
         "credit_id": creditId,
         "department": department,
         "job": job,

@@ -7,7 +7,8 @@ class CastAndCrew extends StatelessWidget {
   final List<Cast> cast;
   final List<Crew> crew;
 
-  const CastAndCrew({Key key, this.cast, this.crew}) : super(key: key);
+  const CastAndCrew({Key? key, required this.cast, required this.crew})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

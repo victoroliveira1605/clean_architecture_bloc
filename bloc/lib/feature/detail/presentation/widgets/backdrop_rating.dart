@@ -5,9 +5,9 @@ import 'package:flutter_svg/svg.dart';
 
 class BackdropAndRating extends StatelessWidget {
   const BackdropAndRating({
-    Key key,
-    @required this.size,
-    @required this.movie,
+    Key? key,
+    required this.size,
+    required this.movie,
   }) : super(key: key);
 
   final Size size;

@@ -3,7 +3,6 @@ import 'package:clean_architecture_bloc/feature/movies/domain/usecases/get_all_n
 import 'package:clean_architecture_bloc/feature/movies/domain/usecases/get_all_soon.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_event.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_state.dart';
-import 'package:flutter/material.dart';
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final GetAllNewShowing getAllNewShowing;
@@ -11,7 +10,7 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   int page = 1;
   bool isFetching = false;
 
-  MoviesBloc({@required this.getAllNewShowing, @required this.getAllSoon})
+  MoviesBloc({required this.getAllNewShowing, required this.getAllSoon})
       : super(MoviesInitialState());
 
   @override

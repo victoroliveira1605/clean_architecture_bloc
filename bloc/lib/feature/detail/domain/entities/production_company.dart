@@ -1,21 +1,20 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class ProductionCompany extends Equatable {
   ProductionCompany({
-    @required this.id,
-    @required this.logoPath,
-    @required this.name,
-    @required this.originCountry,
+    required this.id,
+    required this.logoPath,
+    required this.name,
+    required this.originCountry,
   });
 
   final int id;
-  final String logoPath;
+  final String? logoPath;
   final String name;
   final String originCountry;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         logoPath,
         name,

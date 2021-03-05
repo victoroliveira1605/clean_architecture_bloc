@@ -24,9 +24,7 @@ class PopularMoviesModel extends Popular {
       );
 
   Map<String, dynamic> toJson() {
-    List<Map> _results = this.results != null
-        ? this.results.map((i) => i.toJson()).toList()
-        : null;
+    List<Map> _results = this.results.map((i) => i.toJson()).toList();
     return {
       "results": _results,
       "page": page,

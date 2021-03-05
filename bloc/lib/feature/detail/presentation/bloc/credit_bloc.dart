@@ -3,12 +3,11 @@ import 'package:clean_architecture_bloc/feature/detail/domain/usecases/get_cast_
     as cast;
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_event.dart';
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_state.dart';
-import 'package:flutter/material.dart';
 
 class CreditBloc extends Bloc<CreditEvent, CreditState> {
   final cast.GetCastCrew getCastCrew;
 
-  CreditBloc({@required this.getCastCrew}) : super(CreditInitialState());
+  CreditBloc({required this.getCastCrew}) : super(CreditInitialState());
 
   @override
   Stream<CreditState> mapEventToState(CreditEvent event) async* {

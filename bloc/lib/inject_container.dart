@@ -1,4 +1,3 @@
-import 'package:clean_architecture_bloc/core/network/network_info.dart';
 import 'package:clean_architecture_bloc/feature/detail/data/data_source/detail_remote_data_source.dart';
 import 'package:clean_architecture_bloc/feature/detail/data/repositories/detail_repository_impl.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/repositories/detail_repository.dart';
@@ -12,7 +11,6 @@ import 'package:clean_architecture_bloc/feature/movies/domain/repositories/movie
 import 'package:clean_architecture_bloc/feature/movies/domain/usecases/get_all_new_showing.dart';
 import 'package:clean_architecture_bloc/feature/movies/domain/usecases/get_all_soon.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_bloc.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,13 +57,13 @@ Future<void> init() async {
   getIt.registerLazySingleton<MoviesRepository>(
     () => MoviesRepositoryImpl(
       moviesRemoteDatasource: getIt(),
-      networkInfo: getIt(),
+      // networkInfo: getIt(),
     ),
   );
   getIt.registerLazySingleton<DetailRepository>(
     () => DetailRepositoryImpl(
       detailRemoteDatasource: getIt(),
-      networkInfo: getIt(),
+      // networkInfo: getIt(),
     ),
   );
 
@@ -78,9 +76,9 @@ Future<void> init() async {
   );
 
   //! Core
-  getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
+  // getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   //! External
   getIt.registerLazySingleton(() => http.Client());
-  getIt.registerLazySingleton(() => DataConnectionChecker());
+  // getIt.registerLazySingleton(() => Connectivity());
 }

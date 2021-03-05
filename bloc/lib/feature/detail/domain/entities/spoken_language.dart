@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class SpokenLanguage extends Equatable {
   SpokenLanguage({
-    @required this.englishName,
-    @required this.iso6391,
-    @required this.name,
+    required this.englishName,
+    required this.iso6391,
+    required this.name,
   });
 
   final String englishName;

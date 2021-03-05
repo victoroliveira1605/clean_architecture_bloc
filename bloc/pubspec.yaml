@@ -4,20 +4,19 @@ description: Example architecture clean bloc.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  intl:
-  flutter_bloc:
-  dartz:
-  get_it:
-  http:
+  intl: ^0.17.0-nullsafety.2
+  flutter_bloc: ^7.0.0-nullsafety.3
+  dartz: ^0.10.0-nullsafety.1
+  get_it: ^6.0.0-nullsafety.2
+  http: 0.13.0-nullsafety.0
   flare_flutter:
-  equatable:
-  scroll_snap_list:
+  # connectivity: 3.0.0-nullsafety.3
+  equatable: ^2.0.0-nullsafety.4
   flutter_svg: ^0.21.0-nullsafety.0
-  animations:
-  data_connection_checker:
+  animations: ^2.0.0-nullsafety.0
   flutter:
     sdk: flutter
 

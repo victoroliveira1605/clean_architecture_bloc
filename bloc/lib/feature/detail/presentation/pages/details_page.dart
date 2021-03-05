@@ -1,7 +1,6 @@
 import 'package:clean_architecture_bloc/core/constants/app_color.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/cast.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/crew.dart';
-import 'package:clean_architecture_bloc/feature/detail/domain/entities/detail.dart';
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_bloc.dart';
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_event.dart';
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_state.dart';
@@ -19,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsPage extends StatefulWidget {
   final Result movie;
-  const DetailsPage({Key key, @required this.movie}) : super(key: key);
+  const DetailsPage({Key? key, required this.movie}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -28,7 +27,6 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   final List<Cast> _cast = [];
   final List<Crew> _crew = [];
-  Detail _detail;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +50,9 @@ class _DetailsPageState extends State<DetailsPage> {
                 BlocConsumer<DetailBloc, DetailState>(
                   listener: (context, state) {
                     if (state is DetailLoadingState) {
-                      return CircularProgressIndicator();
+                      CircularProgressIndicator();
                     } else if (state is DetailLoadFailedState) {
-                      return ScaffoldMessenger.of(context).showSnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Falha ao carregar !')));
                     }
                   },
@@ -64,11 +62,9 @@ class _DetailsPageState extends State<DetailsPage> {
                         child: CircularProgressIndicator(),
                       );
                     } else if (state is DetailLoadSuccessState) {
-                      _detail = state.detail;
+                      return TitleDurationCategory(detail: state.detail);
                     }
-                    return _detail != null
-                        ? TitleDurationCategory(detail: _detail)
-                        : Container();
+                    return Container();
                   },
                 ),
                 Synope(
@@ -77,9 +73,9 @@ class _DetailsPageState extends State<DetailsPage> {
                 BlocConsumer<CreditBloc, CreditState>(
                   listener: (context, state) {
                     if (state is CreditLoadingState) {
-                      return CircularProgressIndicator();
+                      CircularProgressIndicator();
                     } else if (state is CreditLoadFailedState) {
-                      return ScaffoldMessenger.of(context).showSnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Falha ao carregar !')));
                     }
                   },

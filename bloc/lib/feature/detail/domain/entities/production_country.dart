@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class ProductionCountry extends Equatable {
   ProductionCountry({
-    @required this.iso31661,
-    @required this.name,
+    required this.iso31661,
+    required this.name,
   });
 
   final String iso31661;

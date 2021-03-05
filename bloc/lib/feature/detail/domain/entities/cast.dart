@@ -1,20 +1,19 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 class Cast extends Equatable {
   Cast({
-    @required this.adult,
-    @required this.gender,
-    @required this.id,
-    @required this.knownForDepartment,
-    @required this.name,
-    @required this.originalName,
-    @required this.popularity,
-    @required this.profilePath,
-    @required this.castId,
-    @required this.character,
-    @required this.creditId,
-    @required this.order,
+    required this.adult,
+    required this.gender,
+    required this.id,
+    required this.knownForDepartment,
+    required this.name,
+    required this.originalName,
+    required this.popularity,
+    required this.profilePath,
+    required this.castId,
+    required this.character,
+    required this.creditId,
+    required this.order,
   });
 
   final bool adult;
@@ -24,14 +23,14 @@ class Cast extends Equatable {
   final String name;
   final String originalName;
   final double popularity;
-  final String profilePath;
+  final String? profilePath;
   final int castId;
   final String character;
   final String creditId;
   final int order;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         adult,
         gender,
         id,

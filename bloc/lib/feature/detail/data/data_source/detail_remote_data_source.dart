@@ -6,7 +6,6 @@ import 'package:clean_architecture_bloc/feature/detail/data/models/credits_model
 import 'package:clean_architecture_bloc/feature/detail/data/models/detail_model.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/credits.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/detail.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 abstract class DetailRemoteDataSource {
@@ -17,14 +16,14 @@ abstract class DetailRemoteDataSource {
 class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
   final http.Client client;
 
-  DetailRemoteDataSourceImpl({@required this.client});
+  DetailRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<Credits> getCastCrew(int id) =>
-      _getCastCrew(url + '3/movie/$id/credits', {'Authorization': key});
+  Future<Credits> getCastCrew(int id) => _getCastCrew(
+      Uri.https(url, '/3/movie/$id/credits'), {'Authorization': key});
 
   Future<CreditsModel> _getCastCrew(
-      String url, Map<String, String> headers) async {
+      Uri url, Map<String, String> headers) async {
     final response = await client.get(url, headers: headers);
 
     if (response.statusCode == 200) {
@@ -37,10 +36,9 @@ class DetailRemoteDataSourceImpl implements DetailRemoteDataSource {
 
   @override
   Future<Detail> getDetail(int id) =>
-      _getDetail(url + '3/movie/$id', {'Authorization': key});
+      _getDetail(Uri.https(url, '/3/movie/$id'), {'Authorization': key});
 
-  Future<DetailModel> _getDetail(
-      String url, Map<String, String> headers) async {
+  Future<DetailModel> _getDetail(Uri url, Map<String, String> headers) async {
     final response = await client.get(url, headers: headers);
 
     if (response.statusCode == 200) {

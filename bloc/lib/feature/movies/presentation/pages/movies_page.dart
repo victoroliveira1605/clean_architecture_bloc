@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MoviesPage extends StatefulWidget {
-  const MoviesPage({Key key}) : super(key: key);
+  const MoviesPage({Key? key}) : super(key: key);
 
   @override
   _MoviesPageState createState() => _MoviesPageState();
@@ -30,10 +30,10 @@ class _MoviesPageState extends State<MoviesPage> {
         body: BlocConsumer<MoviesBloc, MoviesState>(
           listener: (context, state) {
             if (state is MoviesLoadingState) {
-              return ScaffoldMessenger.of(context)
+              ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text('Carregando...')));
             } else if (state is MoviesLoadFailedState) {
-              return ScaffoldMessenger.of(context)
+              ScaffoldMessenger.of(context)
                   .showSnackBar(SnackBar(content: Text('Falha ao carregar !')));
             }
           },

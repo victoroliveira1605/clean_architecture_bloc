@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 class TitleDurationCategory extends StatelessWidget {
   final Detail detail;
 
-  const TitleDurationCategory({Key key, @required this.detail})
+  const TitleDurationCategory({Key? key, required this.detail})
       : super(key: key);
 
   @override
