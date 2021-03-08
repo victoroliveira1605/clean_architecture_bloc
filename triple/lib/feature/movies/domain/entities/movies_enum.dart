@@ -1,0 +1,1 @@
+enum MoviesEnum { NEWSHOWING, SOON }

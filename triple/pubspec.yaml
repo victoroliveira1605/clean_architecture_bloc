@@ -1,5 +1,5 @@
-name: clean_architecture_bloc
-description: Example architecture clean bloc.
+name: clean_architecture_triple
+description: Example architecture clean triple.
 
 version: 1.0.0+1
 
@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   intl: ^0.17.0-nullsafety.2
-  flutter_bloc: ^7.0.0-nullsafety.3
   dartz: ^0.10.0-nullsafety.1
   get_it: ^6.0.0-nullsafety.2
   http: 0.13.0-nullsafety.0
@@ -16,6 +15,7 @@ dependencies:
   equatable: ^2.0.0-nullsafety.4
   flutter_svg: ^0.21.0-nullsafety.0
   animations: ^2.0.0-nullsafety.0
+  flutter_triple:
   flutter:
     sdk: flutter
 
