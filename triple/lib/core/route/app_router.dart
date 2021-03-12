@@ -1,5 +1,5 @@
 import 'package:clean_architecture_triple/feature/movies/presentation/pages/movies_page.dart';
-import 'package:clean_architecture_triple/feature/splash/presentation/pages/splash_page.dart';
+import 'package:clean_architecture_triple/feature/splash/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppPages {

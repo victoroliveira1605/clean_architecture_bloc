@@ -1,7 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:clean_architecture_triple/core/constants/app_color.dart';
 import 'package:clean_architecture_triple/core/constants/strings.dart';
-import 'package:clean_architecture_triple/feature/detail/presentation/pages/details_page.dart';
 import 'package:clean_architecture_triple/feature/movies/data/models/result._model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,7 +53,7 @@ class CardMovie extends StatelessWidget {
               ],
             ),
           ),
-          openBuilder: (context, action) => DetailsPage(movie: item),
+          openBuilder: (context, action) => Container(),
         ),
       ),
     );

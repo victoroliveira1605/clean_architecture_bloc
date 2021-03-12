@@ -11,6 +11,6 @@ class GetAllSoon implements UseCase<Upcoming, int> {
 
   @override
   Future<Either<Failure, Upcoming>> call(int page) async {
-    return await moviesRepository.getAllSoon(page);
+    return moviesRepository.getAllSoon(page);
   }
 }
