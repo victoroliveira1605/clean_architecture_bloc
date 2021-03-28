@@ -1,5 +1,9 @@
 class ConnectionExceptions implements Exception {}
 
+class ServerException implements Exception {}
+
+class CacheException implements Exception {}
+
 class TimeoutException extends ConnectionExceptions {
   TimeoutException() : super();
 }
@@ -14,10 +18,6 @@ class BadRequestException extends ConnectionExceptions {
 
 class UnauthorisedException extends ConnectionExceptions {
   UnauthorisedException() : super();
-}
-
-class ServerException extends ConnectionExceptions {
-  ServerException() : super();
 }
 
 class AppExceptions implements Exception {
