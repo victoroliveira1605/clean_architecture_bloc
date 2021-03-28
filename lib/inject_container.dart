@@ -17,7 +17,6 @@ import 'package:http/http.dart' as http;
 final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
-  //! Features - Products
   // Bloc
   getIt.registerFactory<MoviesBloc>(
     () => MoviesBloc(
@@ -74,9 +73,6 @@ Future<void> init() async {
   getIt.registerLazySingleton<DetailRemoteDataSource>(
     () => DetailRemoteDataSourceImpl(client: getIt()),
   );
-
-  //! Core
-  // getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   //! External
   getIt.registerLazySingleton(() => http.Client());

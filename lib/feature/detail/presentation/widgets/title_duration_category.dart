@@ -31,19 +31,15 @@ class TitleDurationCategory extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      DateFormat("yyyy").format(
-                          DateFormat("yyyy-MM-dd").parse(detail.releaseDate)),
+                      DateFormat(detail_format_yyyy).format(
+                          DateFormat(detail_format_yyyy_mm_dd)
+                              .parse(detail.releaseDate)),
                       style: TextStyle(
                           color: textAceent, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: kDefaultPadding),
-                    // Text(
-                    //   "GENERO",
-                    //   style: TextStyle(color: Color(0xFF9A9BB2)),
-                    // ),
-                    // SizedBox(width: kDefaultPadding),
                     Text(
-                      detail.runtime.toString() + ' min',
+                      detail.runtime.toString() + detail_minutes,
                       style: TextStyle(
                           color: textAceent, fontWeight: FontWeight.bold),
                     ),

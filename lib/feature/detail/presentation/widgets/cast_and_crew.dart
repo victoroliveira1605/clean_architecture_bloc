@@ -17,7 +17,7 @@ class CastAndCrew extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(top: 40, left: 20, bottom: 20),
-          child: Text("Elenco",
+          child: Text(detail_cast,
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 22,

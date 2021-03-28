@@ -1,4 +1,5 @@
 import 'package:clean_architecture_bloc/core/constants/app_color.dart';
+import 'package:clean_architecture_bloc/core/constants/strings.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/cast.dart';
 import 'package:clean_architecture_bloc/feature/detail/domain/entities/crew.dart';
 import 'package:clean_architecture_bloc/feature/detail/presentation/bloc/credit_bloc.dart';
@@ -53,7 +54,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       CircularProgressIndicator();
                     } else if (state is DetailLoadFailedState) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Falha ao carregar !')));
+                          SnackBar(content: Text(global_failure)));
                     }
                   },
                   builder: (context, state) {
@@ -76,7 +77,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       CircularProgressIndicator();
                     } else if (state is CreditLoadFailedState) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Falha ao carregar !')));
+                          SnackBar(content: Text(global_failure)));
                     }
                   },
                   builder: (context, state) {

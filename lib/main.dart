@@ -1,3 +1,4 @@
+import 'package:clean_architecture_bloc/core/constants/app_color.dart';
 import 'package:clean_architecture_bloc/core/route/app_router.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_bloc.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_event.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'inject_container.dart' as di;
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarIconBrightness: Brightness.light, statusBarColor: primaryColor));
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: AppPages.pages,
       home: MoviesPage(),
+      theme: ThemeData(appBarTheme: AppBarTheme(brightness: Brightness.light)),
     );
   }
 }

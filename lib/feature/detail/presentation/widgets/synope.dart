@@ -13,7 +13,7 @@ class Synope extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
           child: Text(
-            "Resumo",
+            detail_summarie,
             style: TextStyle(
                 color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),

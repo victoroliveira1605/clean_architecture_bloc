@@ -1,4 +1,5 @@
 import 'package:clean_architecture_bloc/core/constants/app_color.dart';
+import 'package:clean_architecture_bloc/core/constants/strings.dart';
 import 'package:clean_architecture_bloc/feature/movies/data/models/result._model.dart';
 import 'package:clean_architecture_bloc/feature/movies/domain/entities/movies_enum.dart';
 import 'package:clean_architecture_bloc/feature/movies/presentation/bloc/movies_bloc.dart';
@@ -31,10 +32,10 @@ class _MoviesPageState extends State<MoviesPage> {
           listener: (context, state) {
             if (state is MoviesLoadingState) {
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Carregando...')));
+                  .showSnackBar(SnackBar(content: Text(global_loading)));
             } else if (state is MoviesLoadFailedState) {
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Falha ao carregar !')));
+                  .showSnackBar(SnackBar(content: Text(global_failure)));
             }
           },
           builder: (context, state) {
