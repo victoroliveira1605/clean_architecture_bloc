@@ -15,15 +15,6 @@ class DetailRepositoryImpl implements DetailRepository {
 
   @override
   Future<Either<Failure, Credits>> getCastCrew(int id) async {
-    // if (await networkInfo.isConnected) {
-    //   try {
-    //     return Right(await detailRemoteDatasource.getCastCrew(id));
-    //   } on ServerException {
-    //     return Left(ServerFailure());
-    //   }
-    // } else {
-    //   return Left(ServerFailure());
-    // }
     try {
       return Right(await detailRemoteDatasource.getCastCrew(id));
     } on ServerException {
@@ -33,15 +24,6 @@ class DetailRepositoryImpl implements DetailRepository {
 
   @override
   Future<Either<Failure, Detail>> getDetail(int id) async {
-    // if (await networkInfo.isConnected) {
-    //   try {
-    //     return Right(await detailRemoteDatasource.getDetail(id));
-    //   } on ServerException {
-    //     return Left(ServerFailure());
-    //   }
-    // } else {
-    //   return Left(ServerFailure());
-    // }
     try {
       return Right(await detailRemoteDatasource.getDetail(id));
     } on ServerException {

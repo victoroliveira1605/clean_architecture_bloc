@@ -15,15 +15,6 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
   @override
   Future<Either<Failure, Popular>> getAllNewShowing(int page) async {
-    // if (await networkInfo.isConnected) {
-    //   try {
-    //     return Right(await moviesRemoteDatasource.getAllNewShowing(page));
-    //   } on ServerException {
-    //     return Left(ServerFailure());
-    //   }
-    // } else {
-    //   return Left(ServerFailure());
-    // }
     try {
       return Right(await moviesRemoteDatasource.getAllNewShowing(page));
     } on ServerException {
@@ -33,15 +24,6 @@ class MoviesRepositoryImpl implements MoviesRepository {
 
   @override
   Future<Either<Failure, Upcoming>> getAllSoon(int page) async {
-    // if (await networkInfo.isConnected) {
-    //   try {
-    //     return Right(await moviesRemoteDatasource.getAllSoon(page));
-    //   } on ServerException {
-    //     return Left(ServerFailure());
-    //   }
-    // } else {
-    //   return Left(ServerFailure());
-    // }
     try {
       return Right(await moviesRemoteDatasource.getAllSoon(page));
     } on ServerException {
